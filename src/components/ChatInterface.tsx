@@ -114,63 +114,67 @@ const ChatInterface = () => {
   return (
     <>
       <div 
-        className={`fixed bottom-4 right-4 w-96 h-[600px] bg-white rounded-lg shadow-xl transition-transform duration-300 transform ${
-          isChatOpen ? 'translate-y-0' : 'translate-y-[calc(100%+1rem)]'
+        className={`fixed bottom-4 right-4 w-96 h-[600px] glass-card rounded-xl shadow-2xl transition-all duration-300 transform ${
+          isChatOpen ? 'translate-y-0 opacity-100' : 'translate-y-[calc(100%+1rem)] opacity-0'
         } z-50`}
       >
-        <div className="flex flex-col h-full border border-neutral-200 rounded-lg">
-          <div className="p-4 border-b border-neutral-200 flex justify-between items-center bg-white rounded-t-lg">
-            <h2 className="text-lg font-semibold">Chat with Us</h2>
+        <div className="flex flex-col h-full border border-neutral-200/50 rounded-xl overflow-hidden">
+          <div className="p-4 border-b border-neutral-200/50 flex justify-between items-center bg-white/50 backdrop-blur-sm">
+            <div className="flex items-center space-x-3">
+              <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <h2 className="text-lg font-semibold text-neutral-800">Business Assistant</h2>
+            </div>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsChatOpen(false)}
-              className="h-8 w-8"
+              className="h-8 w-8 hover:bg-neutral-100/50"
             >
-              <X className="h-4 w-4" />
+              <X className="h-4 w-4 text-neutral-600" />
             </Button>
           </div>
           
           <div 
             ref={chatRef}
-            className="flex-1 overflow-y-auto p-4 space-y-4"
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-neutral-50/50"
           >
             {messages.map((message, index) => (
               <div 
                 key={index} 
-                className={`max-w-[80%] ${
+                className={`max-w-[80%] animate-in slide-in-from-bottom-2 ${
                   message.role === 'user' 
-                    ? 'ml-auto bg-primary text-white' 
+                    ? 'ml-auto bg-accent text-white' 
                     : message.role === 'error'
-                    ? 'bg-red-100 text-red-600'
-                    : 'bg-neutral-100'
-                } rounded-lg p-3`}
+                    ? 'bg-red-100 text-red-600 border border-red-200'
+                    : 'bg-white border border-neutral-200/50 shadow-sm'
+                } rounded-2xl p-3`}
               >
-                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                <p className="text-sm leading-relaxed">{message.content}</p>
               </div>
             ))}
             {isLoading && (
               <div className="flex space-x-2 justify-center p-4">
-                <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
               </div>
             )}
           </div>
           
-          <div className="p-4 border-t border-neutral-200">
+          <div className="p-4 border-t border-neutral-200/50 bg-white/50 backdrop-blur-sm">
             <div className="flex space-x-2">
               <Input
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Type your message..."
-                className="flex-1"
+                placeholder="Ask about our locations, hours, or policies..."
+                className="flex-1 bg-white/70 border-neutral-200/50 focus:border-accent focus:ring-accent"
               />
               <Button
                 onClick={sendMessage}
                 disabled={isLoading}
                 size="icon"
+                className="bg-accent hover:bg-accent/90 text-white shadow-md"
               >
                 <Send className="h-4 w-4" />
               </Button>
@@ -181,7 +185,7 @@ const ChatInterface = () => {
 
       <Button
         onClick={() => setIsChatOpen(true)}
-        className="fixed bottom-4 right-4 h-12 w-12 rounded-full shadow-lg z-50"
+        className="fixed bottom-4 right-4 h-12 w-12 rounded-full shadow-lg z-50 bg-accent hover:bg-accent/90 animate-float"
         size="icon"
       >
         <MessageCircle className="h-6 w-6" />
