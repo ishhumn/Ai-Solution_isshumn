@@ -114,39 +114,39 @@ const ChatInterface = () => {
   return (
     <>
       <div 
-        className={`fixed bottom-4 right-4 w-80 h-[500px] glass-card rounded-xl shadow-2xl transition-all duration-300 transform ${
+        className={`fixed bottom-4 right-4 w-80 h-[500px] bg-[#1A1F2C]/90 backdrop-blur-lg rounded-xl shadow-2xl transition-all duration-300 transform ${
           isChatOpen ? 'translate-y-0 opacity-100' : 'translate-y-[calc(100%+1rem)] opacity-0'
-        } z-50`}
+        } z-50 border border-[#403E43]/20`}
       >
-        <div className="flex flex-col h-full border border-neutral-200/50 rounded-xl overflow-hidden">
-          <div className="p-3 border-b border-neutral-200/50 flex justify-between items-center bg-white/50 backdrop-blur-sm">
+        <div className="flex flex-col h-full rounded-xl overflow-hidden">
+          <div className="p-3 border-b border-[#403E43]/20 flex justify-between items-center bg-[#1A1F2C]/50">
             <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <h2 className="text-sm font-semibold text-neutral-800">Business Assistant</h2>
+              <div className="w-2 h-2 rounded-full bg-[#9b87f5] animate-pulse" />
+              <h2 className="text-sm font-semibold text-[#aaadb0]">Business Assistant</h2>
             </div>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsChatOpen(false)}
-              className="h-6 w-6 hover:bg-neutral-100/50"
+              className="h-6 w-6 hover:bg-[#403E43]/20"
             >
-              <X className="h-3 w-3 text-neutral-600" />
+              <X className="h-3 w-3 text-[#8E9196]" />
             </Button>
           </div>
           
           <div 
             ref={chatRef}
-            className="flex-1 overflow-y-auto p-3 space-y-3 bg-neutral-50/50"
+            className="flex-1 overflow-y-auto p-3 space-y-3 bg-[#221F26]/50"
           >
             {messages.map((message, index) => (
               <div 
                 key={index} 
                 className={`max-w-[85%] animate-in slide-in-from-bottom-2 ${
                   message.role === 'user' 
-                    ? 'ml-auto bg-accent text-white' 
+                    ? 'ml-auto bg-[#9b87f5] text-white' 
                     : message.role === 'error'
                     ? 'bg-red-100 text-red-600 border border-red-200'
-                    : 'bg-white border border-neutral-200/50 shadow-sm'
+                    : 'bg-[#403E43]/50 text-[#aaadb0] border border-[#403E43]/20'
                 } rounded-xl p-2.5`}
               >
                 <p className="text-xs leading-relaxed">{message.content}</p>
@@ -154,27 +154,27 @@ const ChatInterface = () => {
             ))}
             {isLoading && (
               <div className="flex space-x-1.5 justify-center p-2">
-                <div className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                <div className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                <div className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                <div className="w-1.5 h-1.5 bg-[#9b87f5]/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-1.5 h-1.5 bg-[#9b87f5]/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-1.5 h-1.5 bg-[#9b87f5]/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
               </div>
             )}
           </div>
           
-          <div className="p-3 border-t border-neutral-200/50 bg-white/50 backdrop-blur-sm">
+          <div className="p-3 border-t border-[#403E43]/20 bg-[#1A1F2C]/50">
             <div className="flex space-x-2">
               <Input
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="flex-1 text-xs bg-white/70 border-neutral-200/50 focus:border-accent focus:ring-accent"
+                className="flex-1 text-xs bg-[#403E43]/20 border-[#403E43]/20 text-[#aaadb0] focus:border-[#9b87f5] focus:ring-[#9b87f5] placeholder:text-[#8E9196]/50"
               />
               <Button
                 onClick={sendMessage}
                 disabled={isLoading}
                 size="icon"
-                className="h-8 w-8 bg-accent hover:bg-accent/90 text-white shadow-md"
+                className="h-8 w-8 bg-[#9b87f5] hover:bg-[#7E69AB] text-white shadow-md"
               >
                 <Send className="h-3 w-3" />
               </Button>
@@ -185,7 +185,7 @@ const ChatInterface = () => {
 
       <Button
         onClick={() => setIsChatOpen(true)}
-        className="fixed bottom-4 right-4 h-10 w-10 rounded-full shadow-lg z-50 bg-accent hover:bg-accent/90 animate-float"
+        className="fixed bottom-4 right-4 h-10 w-10 rounded-full shadow-lg z-50 bg-[#9b87f5] hover:bg-[#7E69AB] animate-float"
         size="icon"
       >
         <MessageCircle className="h-5 w-5" />
