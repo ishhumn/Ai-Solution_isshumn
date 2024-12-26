@@ -5,6 +5,7 @@ import Stats from "../components/Stats";
 import Testimonials from "../components/Testimonials";
 import Blog from "../components/Blog";
 import Footer from "../components/Footer";
+import ChatInterface from "../components/ChatInterface";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
         <Blog />
       </main>
       <Footer />
+      <ChatInterface />
     </div>
   );
 };
