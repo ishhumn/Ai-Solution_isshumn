@@ -114,7 +114,7 @@ const ChatInterface = () => {
   return (
     <>
       <div 
-        className={`fixed bottom-4 left-4 w-96 h-[600px] bg-white rounded-lg shadow-xl transition-transform duration-300 transform ${
+        className={`fixed bottom-4 right-4 w-96 h-[600px] bg-white rounded-lg shadow-xl transition-transform duration-300 transform ${
           isChatOpen ? 'translate-y-0' : 'translate-y-[calc(100%+1rem)]'
         } z-50`}
       >
@@ -181,7 +181,7 @@ const ChatInterface = () => {
 
       <Button
         onClick={() => setIsChatOpen(true)}
-        className="fixed bottom-4 left-4 h-12 w-12 rounded-full shadow-lg z-50"
+        className="fixed bottom-4 right-4 h-12 w-12 rounded-full shadow-lg z-50"
         size="icon"
       >
         <MessageCircle className="h-6 w-6" />
