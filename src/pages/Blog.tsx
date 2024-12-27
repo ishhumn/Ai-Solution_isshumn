@@ -100,82 +100,124 @@ const Blog = () => {
     return matchesCategory && matchesSearch;
   });
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-[#1A1F2C]">
       <Header />
       <main className="pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Blog</h1>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] text-transparent bg-clip-text">
+              Our Blog
+            </h1>
+            <p className="text-lg text-[#aaadb0] max-w-2xl mx-auto">
               Discover the latest insights, trends, and innovations in AI, technology, and digital transformation.
             </p>
-          </div>
+          </motion.div>
           
           <div className="mb-8 flex flex-col sm:flex-row gap-4 items-center justify-between">
-            <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex gap-2 overflow-x-auto pb-2 sm:pb-0"
+            >
               {categories.map((category) => (
                 <Button
                   key={category}
                   variant={selectedCategory === category ? "default" : "outline"}
                   onClick={() => setSelectedCategory(category)}
-                  className="whitespace-nowrap"
+                  className={`whitespace-nowrap ${
+                    selectedCategory === category 
+                      ? 'bg-[#9b87f5] hover:bg-[#8B5CF6]' 
+                      : 'border-[#403E43] text-[#aaadb0] hover:bg-[#403E43]/20'
+                  }`}
                 >
                   {category}
                 </Button>
               ))}
-            </div>
-            <Input
-              type="search"
-              placeholder="Search articles..."
-              className="max-w-xs"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
+              <Input
+                type="search"
+                placeholder="Search articles..."
+                className="max-w-xs bg-[#221F26] border-[#403E43] text-[#aaadb0] placeholder:text-[#8E9196]"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </motion.div>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <motion.div 
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr"
+          >
             {filteredPosts.map((post) => (
               <motion.article
                 key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                variants={item}
+                className="bg-[#221F26] rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-[#403E43]/20 h-full flex flex-col group"
               >
                 <div className="aspect-video relative overflow-hidden">
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#221F26] to-transparent opacity-50" />
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 text-sm text-neutral-500 mb-4">
-                    <span className="bg-neutral-100 px-2 py-1 rounded">{post.category}</span>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-2 text-sm text-[#8E9196] mb-4">
+                    <span className="bg-[#403E43]/30 px-2 py-1 rounded">{post.category}</span>
                     <span>•</span>
                     <span>{post.date}</span>
                     <span>•</span>
                     <span>{post.readTime}</span>
                   </div>
-                  <h2 className="text-xl font-semibold mb-3 hover:text-accent transition-colors">
+                  <h2 className="text-xl font-semibold mb-3 text-[#aaadb0] group-hover:text-[#9b87f5] transition-colors">
                     {post.title}
                   </h2>
-                  <p className="text-neutral-600 mb-4 line-clamp-2">{post.excerpt}</p>
-                  <div className="flex items-center justify-between">
+                  <p className="text-[#8E9196] mb-4 line-clamp-2 flex-1">{post.excerpt}</p>
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-[#403E43]/20">
                     <div className="flex items-center gap-3">
                       <img
                         src={post.authorImage}
                         alt={post.author}
-                        className="w-10 h-10 rounded-full object-cover"
+                        className="w-10 h-10 rounded-full object-cover ring-2 ring-[#403E43]/20"
                       />
                       <div>
-                        <p className="font-medium text-sm">{post.author}</p>
-                        <p className="text-sm text-neutral-500">{post.authorRole}</p>
+                        <p className="font-medium text-sm text-[#aaadb0]">{post.author}</p>
+                        <p className="text-sm text-[#8E9196]">{post.authorRole}</p>
                       </div>
                     </div>
                     <Link to={`/blog/${post.id}`}>
-                      <Button variant="outline">
+                      <Button 
+                        variant="outline"
+                        className="border-[#403E43] text-[#aaadb0] hover:bg-[#403E43]/20 hover:text-[#9b87f5]"
+                      >
                         Read More
                       </Button>
                     </Link>
@@ -183,7 +225,7 @@ const Blog = () => {
                 </div>
               </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </main>
       <Footer />
