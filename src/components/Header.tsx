@@ -15,6 +15,11 @@ const Header = () => {
           <a href="#features" className="text-neutral-400 hover:text-white transition-colors">
             Features
           </a>
+
+<Link to="/blog" className="text-neutral-400 hover:text-white transition-colors">
+            Blog
+          </Link>
+          
           <a href="#testimonials" className="text-neutral-400 hover:text-white transition-colors">
             Testimonials
           </a>
@@ -40,6 +45,10 @@ const Header = () => {
             <a href="#features" className="text-neutral-400 hover:text-white transition-colors">
               Features
             </a>
+<Link to="/blog" className="text-neutral-400 hover:text-white transition-colors">
+              Blog
+            </Link>
+            
             <a href="#testimonials" className="text-neutral-400 hover:text-white transition-colors">
               Testimonials
             </a>
