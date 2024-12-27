@@ -1,26 +1,24 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "./Logo";
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-neutral-900/90 backdrop-blur-lg border-b border-neutral-800">
       <nav className="container-padding mx-auto flex h-16 items-center justify-between">
-        <a href="/" className="text-xl font-semibold text-white">
+        <Link to="/" className="text-xl font-semibold text-white">
           Monet
-        </a>
+        </Link>
         
         <div className="hidden md:flex items-center gap-8">
           <a href="#features" className="text-neutral-400 hover:text-white transition-colors">
             Features
           </a>
-
-<Link to="/blog" className="text-neutral-400 hover:text-white transition-colors">
+          <Link to="/blog" className="text-neutral-400 hover:text-white transition-colors">
             Blog
           </Link>
-          
           <a href="#testimonials" className="text-neutral-400 hover:text-white transition-colors">
             Testimonials
           </a>
@@ -46,10 +44,9 @@ const Header = () => {
             <a href="#features" className="text-neutral-400 hover:text-white transition-colors">
               Features
             </a>
-<Link to="/blog" className="text-neutral-400 hover:text-white transition-colors">
+            <Link to="/blog" className="text-neutral-400 hover:text-white transition-colors">
               Blog
             </Link>
-            
             <a href="#testimonials" className="text-neutral-400 hover:text-white transition-colors">
               Testimonials
             </a>
