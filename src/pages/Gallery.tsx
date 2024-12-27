@@ -1,17 +1,12 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { motion } from "framer-motion";
+import GalleryCard from "@/components/gallery/GalleryCard";
+import CategoryFilter from "@/components/gallery/CategoryFilter";
+import UpcomingEvents from "@/components/gallery/UpcomingEvents";
 
 type Category = "all" | "events" | "products" | "team";
 
@@ -107,120 +102,55 @@ const Gallery = () => {
   );
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex flex-col">
+    <div className="min-h-screen bg-neutral-900 flex flex-col">
       <Header />
       <main className="flex-1 container mx-auto px-4 pt-24 pb-16">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-accent bg-clip-text text-transparent">
               Our Gallery
             </h1>
-            <p className="text-neutral-600 max-w-2xl mx-auto">
+            <p className="text-neutral-300 max-w-2xl mx-auto">
               Explore our collection of events, product showcases, and team activities that highlight our journey in AI innovation.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="mb-8">
-            <RadioGroup
-              defaultValue="all"
-              onValueChange={(value) => setSelectedCategory(value as Category)}
-              className="flex flex-wrap gap-4 justify-center"
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="all" id="all" />
-                <Label htmlFor="all">All</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="events" id="events" />
-                <Label htmlFor="events">Events</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="products" id="products" />
-                <Label htmlFor="products">Products</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="team" id="team" />
-                <Label htmlFor="team">Team</Label>
-              </div>
-            </RadioGroup>
-          </div>
+          <CategoryFilter
+            selectedCategory={selectedCategory}
+            onCategoryChange={(value) => setSelectedCategory(value as Category)}
+          />
 
-          <Carousel className="w-full max-w-4xl mx-auto mb-12">
-            <CarouselContent>
-              {filteredItems.map((item) => (
-                <CarouselItem key={item.id}>
-                  <div className="p-1">
-                    <div className="overflow-hidden rounded-lg shadow-lg">
-                      <img
-                        src={item.imageUrl}
-                        alt={item.title}
-                        className="w-full h-[400px] object-cover"
-                      />
-                      <div className="p-6 bg-white">
-                        <h3 className="text-xl font-semibold mb-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-neutral-600 mb-4">{item.description}</p>
-                        <div className="flex justify-between items-center text-sm text-neutral-500">
-                          <span>{item.date}</span>
-                          <span>{item.location}</span>
-                        </div>
-                      </div>
+          <UpcomingEvents />
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <Carousel className="w-full max-w-4xl mx-auto mb-12">
+              <CarouselContent>
+                {filteredItems.map((item) => (
+                  <CarouselItem key={item.id}>
+                    <div className="p-1">
+                      <GalleryCard item={item} />
                     </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="bg-neutral-800 text-neutral-100 hover:bg-neutral-700" />
+              <CarouselNext className="bg-neutral-800 text-neutral-100 hover:bg-neutral-700" />
+            </Carousel>
+          </motion.div>
 
-          <ScrollArea className="h-[600px] w-full rounded-md border">
+          <ScrollArea className="h-[600px] rounded-md border border-neutral-700 bg-neutral-800/30">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
               {filteredItems.map((item) => (
-                <Dialog key={item.id}>
-                  <DialogTrigger asChild>
-                    <div className="cursor-pointer group">
-                      <div className="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <div className="relative">
-                          <img
-                            src={item.imageUrl}
-                            alt={item.title}
-                            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span className="text-white font-medium">View Details</span>
-                          </div>
-                        </div>
-                        <div className="p-4 bg-white">
-                          <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                          <p className="text-sm text-neutral-600 mb-2">{item.description}</p>
-                          <div className="flex justify-between items-center text-xs text-neutral-500">
-                            <span>{item.date}</span>
-                            <span>{item.location}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-2xl">
-                    <DialogHeader>
-                      <DialogTitle>{item.title}</DialogTitle>
-                    </DialogHeader>
-                    <div className="mt-4">
-                      <img
-                        src={item.imageUrl}
-                        alt={item.title}
-                        className="w-full h-[300px] object-cover rounded-lg mb-4"
-                      />
-                      <p className="text-neutral-600">{item.fullDescription}</p>
-                        <span>{item.date}</span>
-                        <span>{item.location}</span>
-                      <div className="mt-4 flex justify-between items-center text-sm text-neutral-500">
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
+                <GalleryCard key={item.id} item={item} />
               ))}
             </div>
           </ScrollArea>
