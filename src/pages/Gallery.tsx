@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
 import GalleryCard from "@/components/gallery/GalleryCard";
@@ -130,30 +129,22 @@ const Gallery = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.5 }}
+            className="mt-12"
           >
-            <Carousel className="w-full max-w-4xl mx-auto mb-12">
-              <CarouselContent>
-                {filteredItems.map((item) => (
-                  <CarouselItem key={item.id}>
-                    <div className="p-1">
-                      <GalleryCard item={item} />
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="bg-neutral-800 text-neutral-100 hover:bg-neutral-700" />
-              <CarouselNext className="bg-neutral-800 text-neutral-100 hover:bg-neutral-700" />
-            </Carousel>
-          </motion.div>
-
-          <ScrollArea className="h-[600px] rounded-md border border-neutral-700 bg-neutral-800/30">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-              {filteredItems.map((item) => (
-                <GalleryCard key={item.id} item={item} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredItems.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <GalleryCard item={item} />
+                </motion.div>
               ))}
             </div>
-          </ScrollArea>
+          </motion.div>
         </div>
       </main>
       <Footer />
