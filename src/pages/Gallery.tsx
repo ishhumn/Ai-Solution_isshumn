@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import GalleryCard from "@/components/gallery/GalleryCard";
 import CategoryFilter from "@/components/gallery/CategoryFilter";
-import UpcomingEvents from "@/components/gallery/UpcomingEvents";
 
 type Category = "all" | "products" | "success-stories" | "culture" | "recognition";
 
@@ -27,59 +26,30 @@ const galleryItems: GalleryItem[] = [
     id: "1",
     category: "products",
     title: "AI Virtual Assistant",
-    description: "Our flagship AI assistant in action",
-    fullDescription: "Experience the power of our AI Virtual Assistant, designed to streamline workflows and enhance productivity across various business processes.",
-    imageUrl: "https://images.unsplash.com/photo-1535378917042-10a22c95931a",
+    description: "Our flagship AI assistant revolutionizing workflow automation",
+    fullDescription: "Experience the power of our AI Virtual Assistant, designed to streamline workflows and enhance productivity across various business processes. This cutting-edge solution represents the future of workplace automation.",
+    imageUrl: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
     date: "2024",
   },
   {
     id: "2",
-    category: "products",
-    title: "Prototyping Solutions",
-    description: "Next-gen AI prototyping platform",
-    fullDescription: "Our prototyping solutions enable rapid development and testing of AI models, significantly reducing time-to-market for innovative products.",
-    imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
-    date: "2024",
-  },
-  {
-    id: "3",
     category: "success-stories",
-    title: "Enterprise Success",
-    description: "Major corporation implements AI solution",
-    fullDescription: "Leading enterprise achieves 300% productivity increase through our AI implementation, transforming their business operations.",
-    imageUrl: "https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0",
+    title: "Enterprise Innovation",
+    description: "Transforming business operations through AI",
+    fullDescription: "See how our AI solutions have transformed enterprise operations, leading to significant improvements in efficiency and innovation across multiple sectors.",
+    imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
     date: "March 2024",
     location: "Global"
   },
   {
-    id: "4",
-    category: "culture",
-    title: "Innovation Hub",
-    description: "Our team collaborating on next-gen AI",
-    fullDescription: "Behind the scenes look at our innovation hub where our talented team works on pushing the boundaries of AI technology.",
-    imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c",
-    date: "2024",
-    location: "HQ"
-  },
-  {
-    id: "5",
+    id: "3",
     category: "recognition",
     title: "Innovation Award 2024",
-    description: "Recognition for AI excellence",
-    fullDescription: "Proud recipients of the 2024 Innovation Award for our contributions to advancing AI technology and its practical applications.",
-    imageUrl: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad",
+    description: "Recognition for AI excellence and innovation",
+    fullDescription: "Proud recipients of the 2024 Innovation Award for our groundbreaking contributions to advancing AI technology and its practical applications in the enterprise space.",
+    imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
     date: "March 2024",
     location: "Tech Awards"
-  },
-  {
-    id: "6",
-    category: "culture",
-    title: "Team Celebration",
-    description: "Celebrating our achievements",
-    fullDescription: "Our team celebrating another successful year of innovation and growth in AI technology.",
-    imageUrl: "https://images.unsplash.com/photo-1511632765486-a01980e01a18",
-    date: "2024",
-    location: "Office"
   }
 ];
 
@@ -113,8 +83,6 @@ const Gallery = () => {
             selectedCategory={selectedCategory}
             onCategoryChange={(value) => setSelectedCategory(value as Category)}
           />
-
-          <UpcomingEvents />
 
           <motion.div
             initial={{ opacity: 0 }}
