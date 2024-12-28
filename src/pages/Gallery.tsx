@@ -22,8 +22,9 @@ interface GalleryItem {
 }
 
 const galleryItems: GalleryItem[] = [
+  // Products Category
   {
-    id: "1",
+    id: "p1",
     category: "products",
     title: "AI Virtual Assistant",
     description: "Our flagship AI assistant revolutionizing workflow automation",
@@ -32,7 +33,36 @@ const galleryItems: GalleryItem[] = [
     date: "2024",
   },
   {
-    id: "2",
+    id: "p2",
+    category: "products",
+    title: "Data Analytics Platform",
+    description: "Advanced analytics and visualization platform",
+    fullDescription: "Our comprehensive data analytics platform provides real-time insights and powerful visualization tools to help businesses make data-driven decisions.",
+    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+    date: "2024",
+  },
+  {
+    id: "p3",
+    category: "products",
+    title: "AI Development Kit",
+    description: "Complete toolkit for AI development",
+    fullDescription: "A comprehensive suite of AI development tools enabling rapid prototyping and deployment of machine learning models.",
+    imageUrl: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+    date: "2024",
+  },
+  {
+    id: "p4",
+    category: "products",
+    title: "Neural Network Suite",
+    description: "Advanced neural network training platform",
+    fullDescription: "State-of-the-art neural network training and optimization platform for enterprise AI applications.",
+    imageUrl: "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d",
+    date: "2024",
+  },
+
+  // Success Stories Category
+  {
+    id: "s1",
     category: "success-stories",
     title: "Enterprise Innovation",
     description: "Transforming business operations through AI",
@@ -42,7 +72,61 @@ const galleryItems: GalleryItem[] = [
     location: "Global"
   },
   {
-    id: "3",
+    id: "s2",
+    category: "success-stories",
+    title: "Healthcare Revolution",
+    description: "AI-powered diagnostic solutions",
+    fullDescription: "Implementation of our AI solutions in healthcare has led to 40% faster diagnostic times and improved patient outcomes.",
+    imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d",
+    date: "February 2024",
+    location: "Healthcare Sector"
+  },
+  {
+    id: "s3",
+    category: "success-stories",
+    title: "Financial Innovation",
+    description: "AI-driven financial analysis",
+    fullDescription: "Major financial institution achieves 200% improvement in risk assessment accuracy using our AI solutions.",
+    imageUrl: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44",
+    date: "January 2024",
+    location: "Financial District"
+  },
+
+  // Culture Category
+  {
+    id: "c1",
+    category: "culture",
+    title: "Innovation Lab",
+    description: "Where ideas come to life",
+    fullDescription: "Take a peek inside our innovation lab where our talented teams collaborate on groundbreaking AI solutions.",
+    imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c",
+    date: "2024",
+    location: "Research Center"
+  },
+  {
+    id: "c2",
+    category: "culture",
+    title: "Team Building",
+    description: "Growing stronger together",
+    fullDescription: "Our team participating in various activities that strengthen our collaborative culture and innovation mindset.",
+    imageUrl: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4",
+    date: "2024",
+    location: "Company Campus"
+  },
+  {
+    id: "c3",
+    category: "culture",
+    title: "Hackathon 2024",
+    description: "48 hours of innovation",
+    fullDescription: "Annual hackathon where our teams push the boundaries of what's possible with AI technology.",
+    imageUrl: "https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0",
+    date: "March 2024",
+    location: "Innovation Hub"
+  },
+
+  // Recognition Category
+  {
+    id: "r1",
     category: "recognition",
     title: "Innovation Award 2024",
     description: "Recognition for AI excellence and innovation",
@@ -50,6 +134,36 @@ const galleryItems: GalleryItem[] = [
     imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
     date: "March 2024",
     location: "Tech Awards"
+  },
+  {
+    id: "r2",
+    category: "recognition",
+    title: "Best AI Solution",
+    description: "Industry leader in AI innovation",
+    fullDescription: "Recognized as the leading provider of enterprise AI solutions at the Global Tech Summit 2024.",
+    imageUrl: "https://images.unsplash.com/photo-1496065187959-7f07b8353c55",
+    date: "February 2024",
+    location: "Global Tech Summit"
+  },
+  {
+    id: "r3",
+    category: "recognition",
+    title: "Excellence in Tech",
+    description: "Pioneering AI development",
+    fullDescription: "Awarded for outstanding contributions to AI technology advancement and implementation.",
+    imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
+    date: "January 2024",
+    location: "Tech Excellence Awards"
+  },
+  {
+    id: "r4",
+    category: "recognition",
+    title: "Sustainability Award",
+    description: "AI for sustainable future",
+    fullDescription: "Recognized for developing AI solutions that contribute to environmental sustainability and efficient resource management.",
+    imageUrl: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a",
+    date: "2024",
+    location: "Global Sustainability Summit"
   }
 ];
 
