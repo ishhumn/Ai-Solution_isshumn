@@ -20,14 +20,14 @@ const CategoryFilter = ({ selectedCategory, onCategoryChange }: CategoryFilterPr
         onValueChange={onCategoryChange}
         className="flex flex-wrap gap-4 justify-center"
       >
-        {["all", "events", "products", "team"].map((category) => (
+        {["all", "products", "success-stories", "culture", "recognition"].map((category) => (
           <div key={category} className="flex items-center space-x-2">
-            <RadioGroupItem value={category} id={category} />
+            <RadioGroupItem value={category} id={category} className="border-accent text-accent" />
             <Label
               htmlFor={category}
-              className="capitalize text-neutral-300 hover:text-accent transition-colors"
+              className="capitalize text-neutral-300 hover:text-accent transition-colors cursor-pointer"
             >
-              {category}
+              {category.split('-').join(' ')}
             </Label>
           </div>
         ))}
