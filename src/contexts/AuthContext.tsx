@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase, UserSession } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 const AuthContext = createContext<{
@@ -13,6 +13,15 @@ const AuthContext = createContext<{
   signOut: async () => {},
   isAdmin: false,
 });
+
+export type UserSession = {
+  user: {
+    id: string;
+    email?: string;
+    role?: string;
+  } | null;
+  isLoading: boolean;
+};
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<UserSession>({
