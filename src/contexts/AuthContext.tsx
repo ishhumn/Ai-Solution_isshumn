@@ -31,8 +31,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const { toast } = useToast();
 
+  const checkAdminRole = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', userId)
+        .single();
+
+      if (error) {
+        console.error('Error checking admin role:', error);
+        return;
+      }
+
+      setIsAdmin(data?.role === 'admin');
+    } catch (error) {
+      console.error('Error in checkAdminRole:', error);
+    }
+  };
+
   useEffect(() => {
-    // Check active sessions and subscribe to auth changes
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
         setSession({ user: session.user, isLoading: false });
@@ -50,26 +68,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         checkAdminRole(session.user.id);
       } else {
         setSession({ user: null, isLoading: false });
+        setIsAdmin(false);
       }
     });
 
     return () => subscription.unsubscribe();
   }, []);
-
-  const checkAdminRole = async (userId: string) => {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', userId)
-      .single();
-
-    if (error) {
-      console.error('Error checking admin role:', error);
-      return;
-    }
-
-    setIsAdmin(data?.role === 'admin');
-  };
 
   const signIn = async (email: string, password: string) => {
     try {
