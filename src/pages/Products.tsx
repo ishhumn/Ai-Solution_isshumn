@@ -35,7 +35,6 @@ const Products = () => {
       return;
     }
 
-    // Save the review to localStorage
     const testimonials = getTestimonials();
     const newTestimonial = {
       id: crypto.randomUUID(),
