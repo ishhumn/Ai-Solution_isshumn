@@ -8,7 +8,7 @@ import Admin from "./pages/Admin";
 import Contact from "./pages/Contact";
 import Products from "./pages/Products";
 import Events from "./pages/Events";
-import AIAssistant from "./pages/AIAssistant";
+import Assistant from "./pages/Assistant";
 import Gallery from "./pages/Gallery";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -23,7 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/products" element={<Products />} />
           <Route path="/events" element={<Events />} />
-          <Route path="/ai-assistant" element={<AIAssistant />} />
+          <Route path="/ai-assistant" element={<Assistant />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />
