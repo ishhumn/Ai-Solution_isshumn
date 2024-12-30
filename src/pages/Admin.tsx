@@ -12,6 +12,7 @@ import GalleryManagement from "@/components/admin/GalleryManagement";
 import BlogManagement from "@/components/admin/BlogManagement";
 import TestimonialsManagement from "@/components/admin/TestimonialsManagement";
 import EventsManagement from "@/components/admin/EventsManagement";
+import ServicesManagement from "@/components/admin/ServicesManagement";
 import { LogOut } from "lucide-react";
 
 const Admin = () => {
@@ -58,6 +59,7 @@ const Admin = () => {
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="mb-8">
               <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+              <TabsTrigger value="services">Services</TabsTrigger>
               <TabsTrigger value="inquiries">Inquiries</TabsTrigger>
               <TabsTrigger value="products">Products</TabsTrigger>
               <TabsTrigger value="events">Events</TabsTrigger>
@@ -68,6 +70,10 @@ const Admin = () => {
 
             <TabsContent value="dashboard">
               <Dashboard />
+            </TabsContent>
+
+            <TabsContent value="services">
+              <ServicesManagement />
             </TabsContent>
 
             <TabsContent value="inquiries">
