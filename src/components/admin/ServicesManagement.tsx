@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Briefcase } from "lucide-react";
+import ServiceForm from "./services/ServiceForm";
+import ServiceList from "./services/ServiceList";
 
 interface Service {
   id: string;
@@ -22,6 +21,10 @@ const ServicesManagement = () => {
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchServices();
+  }, []);
 
   const fetchServices = async () => {
     try {
@@ -131,133 +134,14 @@ const ServicesManagement = () => {
         </Dialog>
       </div>
       
-      <div className="overflow-x-auto">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Title</TableHead>
-              <TableHead>Description</TableHead>
-              <TableHead>Features</TableHead>
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {services.map((service) => (
-              <TableRow key={service.id}>
-                <TableCell>{service.title}</TableCell>
-                <TableCell className="max-w-xs truncate">{service.description}</TableCell>
-                <TableCell>
-                  <ul className="list-disc list-inside">
-                    {service.features.map((feature, index) => (
-                      <li key={index} className="truncate">{feature}</li>
-                    ))}
-                  </ul>
-                </TableCell>
-                <TableCell>
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setEditingService(service);
-                        setIsDialogOpen(true);
-                      }}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="destructive"
-                      onClick={() => handleDelete(service.id)}
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-    </div>
-  );
-};
-
-const ServiceForm = ({
-  initialService,
-  onSave,
-  onCancel
-}: {
-  initialService: Service | null;
-  onSave: (service: Omit<Service, 'id'>) => void;
-  onCancel: () => void;
-}) => {
-  const [formData, setFormData] = useState(
-    initialService || {
-      title: '',
-      description: '',
-      icon: 'briefcase',
-      features: ['']
-    }
-  );
-
-  const handleFeatureChange = (index: number, value: string) => {
-    const newFeatures = [...formData.features];
-    newFeatures[index] = value;
-    setFormData({ ...formData, features: newFeatures });
-  };
-
-  const addFeature = () => {
-    setFormData({ ...formData, features: [...formData.features, ''] });
-  };
-
-  const removeFeature = (index: number) => {
-    const newFeatures = formData.features.filter((_, i) => i !== index);
-    setFormData({ ...formData, features: newFeatures });
-  };
-
-  return (
-    <div className="space-y-4">
-      <Input
-        placeholder="Title"
-        value={formData.title}
-        onChange={e => setFormData({ ...formData, title: e.target.value })}
+      <ServiceList 
+        services={services}
+        onEdit={(service) => {
+          setEditingService(service);
+          setIsDialogOpen(true);
+        }}
+        onDelete={handleDelete}
       />
-      <Textarea
-        placeholder="Description"
-        value={formData.description}
-        onChange={e => setFormData({ ...formData, description: e.target.value })}
-      />
-      <div className="space-y-2">
-        <label className="text-sm font-medium">Features</label>
-        {formData.features.map((feature, index) => (
-          <div key={index} className="flex gap-2">
-            <Input
-              placeholder={`Feature ${index + 1}`}
-              value={feature}
-              onChange={e => handleFeatureChange(index, e.target.value)}
-            />
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => removeFeature(index)}
-              disabled={formData.features.length <= 1}
-            >
-              Remove
-            </Button>
-          </div>
-        ))}
-        <Button
-          type="button"
-          variant="outline"
-          onClick={addFeature}
-          className="w-full"
-        >
-          Add Feature
-        </Button>
-      </div>
-      <div className="flex justify-end gap-2">
-        <Button variant="outline" onClick={onCancel}>Cancel</Button>
-        <Button onClick={() => onSave(formData)}>Save</Button>
-      </div>
     </div>
   );
 };
