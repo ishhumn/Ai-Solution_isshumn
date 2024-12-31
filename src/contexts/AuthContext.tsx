@@ -51,28 +51,46 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        setSession({ user: session.user, isLoading: false });
-        checkAdminRole(session.user.id);
-      } else {
+    // Initialize auth state
+    const initializeAuth = async () => {
+      try {
+        // Get initial session
+        const { data: { session: initialSession }, error: sessionError } = await supabase.auth.getSession();
+        
+        if (sessionError) {
+          throw sessionError;
+        }
+
+        if (initialSession) {
+          setSession({ user: initialSession.user, isLoading: false });
+          await checkAdminRole(initialSession.user.id);
+        } else {
+          setSession({ user: null, isLoading: false });
+        }
+
+        // Set up auth state change listener
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(
+          async (_event, currentSession) => {
+            if (currentSession) {
+              setSession({ user: currentSession.user, isLoading: false });
+              await checkAdminRole(currentSession.user.id);
+            } else {
+              setSession({ user: null, isLoading: false });
+              setIsAdmin(false);
+            }
+          }
+        );
+
+        return () => {
+          subscription.unsubscribe();
+        };
+      } catch (error) {
+        console.error('Error initializing auth:', error);
         setSession({ user: null, isLoading: false });
       }
-    });
+    };
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) {
-        setSession({ user: session.user, isLoading: false });
-        checkAdminRole(session.user.id);
-      } else {
-        setSession({ user: null, isLoading: false });
-        setIsAdmin(false);
-      }
-    });
-
-    return () => subscription.unsubscribe();
+    initializeAuth();
   }, []);
 
   const signIn = async (email: string, password: string) => {
@@ -94,6 +112,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         description: error.message,
         variant: "destructive",
       });
+      throw error; // Re-throw to handle in the component
     }
   };
 
@@ -101,6 +120,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
+
+      // Clear session state
+      setSession({ user: null, isLoading: false });
+      setIsAdmin(false);
 
       toast({
         title: "Success",
@@ -112,6 +135,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         description: error.message,
         variant: "destructive",
       });
+      throw error;
     }
   };
 
