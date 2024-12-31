@@ -1,4 +1,4 @@
-import { Menu, X, Lock } from "lucide-react";
+import { Menu, X, Lock, ChartBar } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "@/components/Logo";
@@ -24,6 +24,10 @@ const Header = () => {
           </Link>
           <Link to="/blog" className="text-neutral-400 hover:text-white transition-colors">
             Blog
+          </Link>
+          <Link to="/charts" className="text-neutral-400 hover:text-white transition-colors flex items-center gap-2">
+            <ChartBar className="w-4 h-4" />
+            Charts
           </Link>
           <Link to="/contact" className="text-neutral-400 hover:text-white transition-colors">
             Contact
@@ -59,6 +63,10 @@ const Header = () => {
             </Link>
             <Link to="/blog" className="text-neutral-400 hover:text-white transition-colors">
               Blog
+            </Link>
+            <Link to="/charts" className="text-neutral-400 hover:text-white transition-colors flex items-center gap-2">
+              <ChartBar className="w-4 h-4" />
+              Charts
             </Link>
             <Link to="/contact" className="text-neutral-400 hover:text-white transition-colors">
               Contact

@@ -16,6 +16,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Login from "./pages/Login";
 import ScheduleDemo from "./pages/ScheduleDemo";
+import Charts from "./pages/Charts";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => {
               <Route path="/blog/:id" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/schedule-demo" element={<ScheduleDemo />} />
+              <Route path="/charts" element={<Charts />} />
               <Route path="/login" element={<Login />} />
               <Route 
                 path="/admin/*" 
