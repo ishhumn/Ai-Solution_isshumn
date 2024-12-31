@@ -1,10 +1,11 @@
 import { Menu, X, Lock } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "@/components/Logo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-neutral-900/90 backdrop-blur-lg border-b border-neutral-800"> 
@@ -31,7 +32,10 @@ const Header = () => {
             <Lock className="w-4 h-4" />
             Admin
           </Link>
-          <button className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors">
+          <button 
+            onClick={() => navigate('/schedule-demo')}
+            className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors"
+          >
             Schedule Demo
           </button>
         </div>
@@ -63,9 +67,12 @@ const Header = () => {
               <Lock className="w-4 h-4" />
               Admin
             </Link>
-            <button className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors">
+            <Link 
+              to="/schedule-demo"
+              className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors text-center"
+            >
               Schedule Demo
-            </button>
+            </Link>
           </div>
         </div>
       )}

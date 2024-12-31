@@ -15,6 +15,7 @@ import Gallery from "./pages/Gallery";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Login from "./pages/Login";
+import ScheduleDemo from "./pages/ScheduleDemo";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/schedule-demo" element={<ScheduleDemo />} />
               <Route path="/login" element={<Login />} />
               <Route 
                 path="/admin/*" 
