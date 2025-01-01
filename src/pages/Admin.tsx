@@ -13,7 +13,8 @@ import BlogManagement from "@/components/admin/BlogManagement";
 import TestimonialsManagement from "@/components/admin/TestimonialsManagement";
 import EventsManagement from "@/components/admin/EventsManagement";
 import ServicesManagement from "@/components/admin/ServicesManagement";
-import { LogOut } from "lucide-react";
+import PasswordChange from "@/components/admin/PasswordChange";
+import { LogOut, Settings } from "lucide-react";
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -66,6 +67,10 @@ const Admin = () => {
               <TabsTrigger value="gallery">Gallery</TabsTrigger>
               <TabsTrigger value="blog">Blog</TabsTrigger>
               <TabsTrigger value="testimonials">Testimonials</TabsTrigger>
+              <TabsTrigger value="settings" className="flex items-center gap-2">
+                <Settings className="w-4 h-4" />
+                Settings
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="dashboard">
@@ -98,6 +103,10 @@ const Admin = () => {
 
             <TabsContent value="testimonials">
               <TestimonialsManagement />
+            </TabsContent>
+
+            <TabsContent value="settings">
+              <PasswordChange />
             </TabsContent>
           </Tabs>
         </div>
