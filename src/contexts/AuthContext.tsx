@@ -94,6 +94,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const signIn = async (email: string, password: string) => {
+    if (!email || !password) {
+      throw new Error('Email and password are required');
+    }
+
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
@@ -112,7 +116,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         description: error.message,
         variant: "destructive",
       });
-      throw error; // Re-throw to handle in the component
+      throw error;
     }
   };
 
@@ -121,7 +125,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
 
-      // Clear session state
       setSession({ user: null, isLoading: false });
       setIsAdmin(false);
 
