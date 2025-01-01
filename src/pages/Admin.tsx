@@ -31,7 +31,7 @@ const Admin = () => {
         description: "You have been logged out of your account.",
       });
       navigate("/login");
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: "Error",
         description: "Failed to log out. Please try again.",
