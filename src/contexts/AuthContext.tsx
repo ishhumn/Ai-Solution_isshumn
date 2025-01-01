@@ -62,6 +62,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
         if (initialSession) {
+          console.log('Current user ID:', initialSession.user.id); // Added this line temporarily
           setSession({ user: initialSession.user, isLoading: false });
           await checkAdminRole(initialSession.user.id);
         } else {
@@ -72,6 +73,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
           async (_event, currentSession) => {
             if (currentSession) {
+              console.log('User ID on auth change:', currentSession.user.id); // Added this line temporarily
               setSession({ user: currentSession.user, isLoading: false });
               await checkAdminRole(currentSession.user.id);
             } else {
