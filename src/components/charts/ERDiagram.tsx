@@ -4,9 +4,9 @@ const ERDiagram = () => {
   return (
     <Card className="p-6">
       <div className="overflow-auto">
-        <svg width="800" height="900" className="mx-auto">
+        <svg width="1000" height="1200" className="mx-auto">
           {/* User/Profile Entity */}
-          <rect x="50" y="100" width="200" height="280" rx="5" fill="#8B5CF6" />
+          <rect x="50" y="100" width="200" height="320" rx="5" fill="#8B5CF6" />
           <rect x="50" y="100" width="200" height="40" rx="5" fill="#6366F1" />
           <text x="150" y="125" textAnchor="middle" fill="white" className="text-sm font-medium">Users/Profiles</text>
           <text x="70" y="160" fill="white" className="text-sm">• id (PK)</text>
@@ -14,11 +14,12 @@ const ERDiagram = () => {
           <text x="70" y="220" fill="white" className="text-sm">• role</text>
           <text x="70" y="250" fill="white" className="text-sm">• first_name</text>
           <text x="70" y="280" fill="white" className="text-sm">• last_name</text>
-          <text x="70" y="310" fill="white" className="text-sm">• created_at</text>
-          <text x="70" y="340" fill="white" className="text-sm">• updated_at</text>
+          <text x="70" y="310" fill="white" className="text-sm">• avatar_url</text>
+          <text x="70" y="340" fill="white" className="text-sm">• created_at</text>
+          <text x="70" y="370" fill="white" className="text-sm">• updated_at</text>
           
           {/* Services Entity */}
-          <rect x="300" y="100" width="200" height="280" rx="5" fill="#8B5CF6" />
+          <rect x="300" y="100" width="200" height="320" rx="5" fill="#8B5CF6" />
           <rect x="300" y="100" width="200" height="40" rx="5" fill="#6366F1" />
           <text x="400" y="125" textAnchor="middle" fill="white" className="text-sm font-medium">Services</text>
           <text x="320" y="160" fill="white" className="text-sm">• id (PK)</text>
@@ -30,57 +31,79 @@ const ERDiagram = () => {
           <text x="320" y="340" fill="white" className="text-sm">• updated_at</text>
           
           {/* Blog Posts Entity */}
-          <rect x="550" y="100" width="200" height="280" rx="5" fill="#8B5CF6" />
+          <rect x="550" y="100" width="200" height="320" rx="5" fill="#8B5CF6" />
           <rect x="550" y="100" width="200" height="40" rx="5" fill="#6366F1" />
           <text x="650" y="125" textAnchor="middle" fill="white" className="text-sm font-medium">Blog Posts</text>
           <text x="570" y="160" fill="white" className="text-sm">• id (PK)</text>
           <text x="570" y="190" fill="white" className="text-sm">• title</text>
           <text x="570" y="220" fill="white" className="text-sm">• content</text>
-          <text x="570" y="250" fill="white" className="text-sm">• author_id (FK)</text>
-          <text x="570" y="280" fill="white" className="text-sm">• status</text>
+          <text x="570" y="250" fill="white" className="text-sm">• image_url</text>
+          <text x="570" y="280" fill="white" className="text-sm">• author_id (FK)</text>
           <text x="570" y="310" fill="white" className="text-sm">• created_at</text>
           <text x="570" y="340" fill="white" className="text-sm">• updated_at</text>
           
           {/* Gallery Entity */}
-          <rect x="50" y="450" width="200" height="280" rx="5" fill="#8B5CF6" />
-          <rect x="50" y="450" width="200" height="40" rx="5" fill="#6366F1" />
-          <text x="150" y="475" textAnchor="middle" fill="white" className="text-sm font-medium">Gallery Items</text>
-          <text x="70" y="510" fill="white" className="text-sm">• id (PK)</text>
-          <text x="70" y="540" fill="white" className="text-sm">• title</text>
-          <text x="70" y="570" fill="white" className="text-sm">• description</text>
-          <text x="70" y="600" fill="white" className="text-sm">• image_url</text>
-          <text x="70" y="630" fill="white" className="text-sm">• category</text>
-          <text x="70" y="660" fill="white" className="text-sm">• created_at</text>
-          <text x="70" y="690" fill="white" className="text-sm">• updated_at</text>
+          <rect x="50" y="500" width="200" height="320" rx="5" fill="#8B5CF6" />
+          <rect x="50" y="500" width="200" height="40" rx="5" fill="#6366F1" />
+          <text x="150" y="525" textAnchor="middle" fill="white" className="text-sm font-medium">Gallery Items</text>
+          <text x="70" y="560" fill="white" className="text-sm">• id (PK)</text>
+          <text x="70" y="590" fill="white" className="text-sm">• title</text>
+          <text x="70" y="620" fill="white" className="text-sm">• description</text>
+          <text x="70" y="650" fill="white" className="text-sm">• image_url</text>
+          <text x="70" y="680" fill="white" className="text-sm">• category</text>
+          <text x="70" y="710" fill="white" className="text-sm">• created_at</text>
+          <text x="70" y="740" fill="white" className="text-sm">• updated_at</text>
           
-          {/* Inquiries Entity */}
-          <rect x="300" y="450" width="200" height="280" rx="5" fill="#8B5CF6" />
-          <rect x="300" y="450" width="200" height="40" rx="5" fill="#6366F1" />
-          <text x="400" y="475" textAnchor="middle" fill="white" className="text-sm font-medium">Inquiries</text>
-          <text x="320" y="510" fill="white" className="text-sm">• id (PK)</text>
-          <text x="320" y="540" fill="white" className="text-sm">• user_id (FK)</text>
-          <text x="320" y="570" fill="white" className="text-sm">• subject</text>
-          <text x="320" y="600" fill="white" className="text-sm">• message</text>
-          <text x="320" y="630" fill="white" className="text-sm">• status</text>
-          <text x="320" y="660" fill="white" className="text-sm">• created_at</text>
-          <text x="320" y="690" fill="white" className="text-sm">• updated_at</text>
+          {/* Events Entity */}
+          <rect x="300" y="500" width="200" height="320" rx="5" fill="#8B5CF6" />
+          <rect x="300" y="500" width="200" height="40" rx="5" fill="#6366F1" />
+          <text x="400" y="525" textAnchor="middle" fill="white" className="text-sm font-medium">Events</text>
+          <text x="320" y="560" fill="white" className="text-sm">• id (PK)</text>
+          <text x="320" y="590" fill="white" className="text-sm">• title</text>
+          <text x="320" y="620" fill="white" className="text-sm">• description</text>
+          <text x="320" y="650" fill="white" className="text-sm">• date</text>
+          <text x="320" y="680" fill="white" className="text-sm">• location</text>
+          <text x="320" y="710" fill="white" className="text-sm">• created_at</text>
+          <text x="320" y="740" fill="white" className="text-sm">• updated_at</text>
+          
+          {/* Event Registrations Entity */}
+          <rect x="550" y="500" width="200" height="320" rx="5" fill="#8B5CF6" />
+          <rect x="550" y="500" width="200" height="40" rx="5" fill="#6366F1" />
+          <text x="650" y="525" textAnchor="middle" fill="white" className="text-sm font-medium">Event Registrations</text>
+          <text x="570" y="560" fill="white" className="text-sm">• id (PK)</text>
+          <text x="570" y="590" fill="white" className="text-sm">• event_id (FK)</text>
+          <text x="570" y="620" fill="white" className="text-sm">• user_id (FK)</text>
+          <text x="570" y="650" fill="white" className="text-sm">• status</text>
+          <text x="570" y="680" fill="white" className="text-sm">• tickets</text>
+          <text x="570" y="710" fill="white" className="text-sm">• created_at</text>
+          <text x="570" y="740" fill="white" className="text-sm">• updated_at</text>
+          
+          {/* Contact Inquiries Entity */}
+          <rect x="800" y="500" width="200" height="320" rx="5" fill="#8B5CF6" />
+          <rect x="800" y="500" width="200" height="40" rx="5" fill="#6366F1" />
+          <text x="900" y="525" textAnchor="middle" fill="white" className="text-sm font-medium">Contact Inquiries</text>
+          <text x="820" y="560" fill="white" className="text-sm">• id (PK)</text>
+          <text x="820" y="590" fill="white" className="text-sm">• name</text>
+          <text x="820" y="620" fill="white" className="text-sm">• email</text>
+          <text x="820" y="650" fill="white" className="text-sm">• message</text>
+          <text x="820" y="680" fill="white" className="text-sm">• status</text>
+          <text x="820" y="710" fill="white" className="text-sm">• created_at</text>
+          <text x="820" y="740" fill="white" className="text-sm">• updated_at</text>
           
           {/* Demo Requests Entity */}
-          <rect x="550" y="450" width="200" height="280" rx="5" fill="#8B5CF6" />
-          <rect x="550" y="450" width="200" height="40" rx="5" fill="#6366F1" />
-          <text x="650" y="475" textAnchor="middle" fill="white" className="text-sm font-medium">Demo Requests</text>
-          <text x="570" y="510" fill="white" className="text-sm">• id (PK)</text>
-          <text x="570" y="540" fill="white" className="text-sm">• user_id (FK)</text>
-          <text x="570" y="570" fill="white" className="text-sm">• preferred_date</text>
-          <text x="570" y="600" fill="white" className="text-sm">• notes</text>
-          <text x="570" y="630" fill="white" className="text-sm">• status</text>
-          <text x="570" y="660" fill="white" className="text-sm">• created_at</text>
-          <text x="570" y="690" fill="white" className="text-sm">• updated_at</text>
+          <rect x="300" y="900" width="200" height="250" rx="5" fill="#8B5CF6" />
+          <rect x="300" y="900" width="200" height="40" rx="5" fill="#6366F1" />
+          <text x="400" y="925" textAnchor="middle" fill="white" className="text-sm font-medium">Demo Requests</text>
+          <text x="320" y="960" fill="white" className="text-sm">• id (PK)</text>
+          <text x="320" y="990" fill="white" className="text-sm">• user_id (FK)</text>
+          <text x="320" y="1020" fill="white" className="text-sm">• preferred_date</text>
+          <text x="320" y="1050" fill="white" className="text-sm">• notes</text>
+          <text x="320" y="1080" fill="white" className="text-sm">• status</text>
           
           {/* Relationships */}
-          <line x1="250" y1="240" x2="550" y2="240" stroke="#D6BCFA" strokeWidth="2" markerEnd="url(#arrowhead)" />
-          <line x1="250" y1="240" x2="300" y2="560" stroke="#D6BCFA" strokeWidth="2" markerEnd="url(#arrowhead)" />
-          <line x1="250" y1="240" x2="550" y2="560" stroke="#D6BCFA" strokeWidth="2" markerEnd="url(#arrowhead)" />
+          <line x1="250" y1="280" x2="550" y2="280" stroke="#D6BCFA" strokeWidth="2" markerEnd="url(#arrowhead)" />
+          <line x1="250" y1="280" x2="300" y2="990" stroke="#D6BCFA" strokeWidth="2" markerEnd="url(#arrowhead)" />
+          <line x1="500" y1="650" x2="550" y2="620" stroke="#D6BCFA" strokeWidth="2" markerEnd="url(#arrowhead)" />
           
           {/* Cardinality Markers */}
           <defs>
@@ -98,10 +121,12 @@ const ERDiagram = () => {
           <li>Services: Product and service offerings with features</li>
           <li>Blog Posts: Content management with author relationships</li>
           <li>Gallery Items: Media management with categorization</li>
-          <li>Inquiries: User support and contact management</li>
-          <li>Demo Requests: Scheduling and demo management</li>
+          <li>Events: Event management with registration tracking</li>
+          <li>Event Registrations: User event participation records</li>
+          <li>Contact Inquiries: User support and contact management</li>
+          <li>Demo Requests: Demo scheduling and management</li>
           <li>All entities include audit fields (created_at, updated_at)</li>
-          <li>Foreign key relationships maintain data integrity</li>
+          <li>Proper foreign key relationships maintain data integrity</li>
         </ul>
       </div>
     </Card>
