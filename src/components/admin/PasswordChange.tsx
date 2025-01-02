@@ -52,8 +52,8 @@ const PasswordChange = () => {
   };
 
   return (
-    <Card className="p-6">
-      <h2 className="text-xl font-semibold mb-4">Change Password</h2>
+    <Card className="p-6 bg-neutral-800 border-neutral-700">
+      <h2 className="text-xl font-semibold mb-4 text-white">Change Password</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Input
@@ -62,6 +62,7 @@ const PasswordChange = () => {
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             required
+            className="bg-neutral-700 border-neutral-600 text-white placeholder:text-neutral-400"
           />
         </div>
         <div>
@@ -71,6 +72,7 @@ const PasswordChange = () => {
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             required
+            className="bg-neutral-700 border-neutral-600 text-white placeholder:text-neutral-400"
           />
         </div>
         <div>
@@ -80,11 +82,12 @@ const PasswordChange = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            className="bg-neutral-700 border-neutral-600 text-white placeholder:text-neutral-400"
           />
         </div>
         <Button 
           type="submit" 
-          className="w-full"
+          className="w-full bg-accent hover:bg-accent/90 text-white"
           disabled={isChanging}
         >
           {isChanging ? "Changing..." : "Change Password"}

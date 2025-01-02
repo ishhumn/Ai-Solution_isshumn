@@ -50,7 +50,7 @@ const Admin = () => {
             <Button 
               variant="outline" 
               onClick={handleLogout}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 bg-neutral-800 text-white hover:bg-neutral-700 border-neutral-700"
             >
               <LogOut className="w-4 h-4" />
               Logout
