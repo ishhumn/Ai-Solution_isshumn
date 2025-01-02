@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext<{
   session: UserSession;
@@ -30,6 +31,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   });
   const [isAdmin, setIsAdmin] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const checkAdminRole = async (userId: string) => {
     try {
@@ -55,33 +57,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const initializeAuth = async () => {
       try {
         // Get initial session
-        const { data: { session: initialSession }, error: sessionError } = await supabase.auth.getSession();
+        const { data: { session: initialSession } } = await supabase.auth.getSession();
         
-        if (sessionError) {
-          throw sessionError;
-        }
-
-        if (initialSession) {
-          console.log('Current user ID:', initialSession.user.id); // Added this line temporarily
+        if (initialSession?.user) {
           setSession({ user: initialSession.user, isLoading: false });
           await checkAdminRole(initialSession.user.id);
         } else {
           setSession({ user: null, isLoading: false });
+          navigate('/login');
         }
 
         // Set up auth state change listener
-        const { data: { subscription } } = supabase.auth.onAuthStateChange(
-          async (_event, currentSession) => {
-            if (currentSession) {
-              console.log('User ID on auth change:', currentSession.user.id); // Added this line temporarily
-              setSession({ user: currentSession.user, isLoading: false });
-              await checkAdminRole(currentSession.user.id);
-            } else {
-              setSession({ user: null, isLoading: false });
-              setIsAdmin(false);
+        const {
+          data: { subscription },
+        } = supabase.auth.onAuthStateChange(async (event, currentSession) => {
+          console.log('Auth state changed:', event);
+          
+          if (currentSession?.user) {
+            setSession({ user: currentSession.user, isLoading: false });
+            await checkAdminRole(currentSession.user.id);
+          } else {
+            setSession({ user: null, isLoading: false });
+            if (event === 'SIGNED_OUT') {
+              navigate('/login');
             }
           }
-        );
+        });
 
         return () => {
           subscription.unsubscribe();
@@ -89,17 +90,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       } catch (error) {
         console.error('Error initializing auth:', error);
         setSession({ user: null, isLoading: false });
+        navigate('/login');
       }
     };
 
     initializeAuth();
-  }, []);
+  }, [navigate]);
 
   const signIn = async (email: string, password: string) => {
-    if (!email || !password) {
-      throw new Error('Email and password are required');
-    }
-
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
@@ -129,11 +127,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       setSession({ user: null, isLoading: false });
       setIsAdmin(false);
-
+      
       toast({
         title: "Success",
         description: "Successfully signed out",
       });
+      
+      navigate('/login');
     } catch (error: any) {
       toast({
         title: "Error",
