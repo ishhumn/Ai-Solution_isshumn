@@ -83,7 +83,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
+{/*         <AuthProvider> */}
           <TooltipProvider>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -108,7 +108,7 @@ const App = () => {
             <Toaster />
             <Sonner />
           </TooltipProvider>
-        </AuthProvider>
+{/*         </AuthProvider> */}
       </QueryClientProvider>
     </BrowserRouter>
   );
