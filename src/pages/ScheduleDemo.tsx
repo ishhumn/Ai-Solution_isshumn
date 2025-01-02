@@ -20,7 +20,18 @@ const ScheduleDemo = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Here we would typically send this to a backend
+    const newRequest = {
+      id: crypto.randomUUID(),
+      ...formData,
+      submittedAt: new Date().toISOString(),
+    };
+
+    // Get existing requests or initialize empty array
+    const existingRequests = JSON.parse(localStorage.getItem('demoRequests') || '[]');
+    
+    // Add new request
+    localStorage.setItem('demoRequests', JSON.stringify([...existingRequests, newRequest]));
+    
     toast({
       title: "Demo Scheduled!",
       description: "We'll be in touch with you shortly to confirm your demo.",
